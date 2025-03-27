@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Common user likes </title>
+</head>
+<body>
+<script type="text/javascript">
+
+function Findusers(userId){
+	
+	
+}
+
+</script>
+<h4> Which user do you want to compare with?</h4>
+<form th:action="@{/compare}" method="get">
+<input  name= "userId1" th:value="${userId1}" >
+<input type="text"  id="userId1" name="userId2"> 
+<button type="submit">Submit</button>
+</form>
+<div th:if="${commonMovies}">
+        <h3>Common Liked Movies:</h3>
+        <ul>
+            <li th:each="movie : ${commonMovies}" th:text="${movie}"></li>
+        </ul>
+    </div>
+</body>
+</html>

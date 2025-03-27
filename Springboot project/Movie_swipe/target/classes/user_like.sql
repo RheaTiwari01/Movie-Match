@@ -1,0 +1,1 @@
+create table user_like(id int AUTO_INCREMENT primary key, user_id int, movie_id varchar(200), liked boolean, foreign key (user_id) references user(id))

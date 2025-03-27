@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Like/Dislike Movies</title>
+</head>
+<body>
+<script>
+let mov_like=[];
+function like_movies(movieId){
+	if(!mov_like.includes(movieId))
+		{
+		mov_like.push(movieId);
+		}
+	
+	
+		}
+		function SubmitMovie()
+		{
+			
+const form = document.getElementById('likeform');
+mov_like.forEach(id => {
+	const input = document.createElement('input');
+	input.type="hidden";
+	input.name="movieIds";
+	input.value=id;
+	form.appendChild(input);
+	
+});
+form.submit();
+		}
+		
+	
+
+</script>
+    <h1>Trending Movies</h1>
+    <form th:action="@{/liked}" method="POST" id="likeform">
+        <div th:each="movie : ${tr}" class='movie-card'>
+            <img th:src="'https://image.tmdb.org/t/p/w500' + ${movie['poster_path']}" 
+                 th:alt="${movie['title']}" 
+                 style="width:150px; height:auto;"/>
+            <p>Movie Name: <span th:text="${movie['title']}"></span></p>
+            <p> Overview: <span th:text="${movie['overview']}"></span></p>
+            
+            <!-- Use the TMDB 'id' directly -->
+            <input type="hidden" name="movie_id" th:value="${movie['id']}"/>
+            
+            <button type="button" th:onclick="'like_movies(' + ${movie['id']} + ')'">Like</button>
+            
+            <button type="button">Dislike</button>
+            <hr/>
+        </div>
+        <button id="submitBtn" type="button" style="display:block;" onclick="SubmitMovie()">Submit Liked Movies</button>
+    </form>
+</body>
+</html>
+
